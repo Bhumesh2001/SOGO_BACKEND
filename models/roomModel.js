@@ -58,6 +58,23 @@ const roomSchema = new mongoose.Schema({
         },
         index: true
     },
+    description: {
+        type: String,
+        required: [true, 'Description is required'],
+        minlength: [10, 'Description must be at least 10 characters long'],
+        maxlength: [500, 'Description must be less than 500 characters'],
+        trim: true,
+    },
+    images: {
+        type: [String],
+        required: [true, 'At least one image URL is required'],
+        validate: {
+            validator: function (images) {
+                return images.every(img => /^https?:\/\/.+\.(jpg|jpeg|png|gif)$/.test(img));
+            },
+            message: 'Each image URL must be valid and end with .jpg, .jpeg, .png, or .gif',
+        }
+    },
     available: {
         type: Boolean,
         default: true,

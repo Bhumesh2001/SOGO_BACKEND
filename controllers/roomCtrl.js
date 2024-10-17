@@ -3,9 +3,20 @@ const Room = require('../models/roomModel');
 // Create a new room
 exports.createRoom = async (req, res, next) => {
     try {
-        const room = new Room(req.body);
-        await room.save();
-        res.status(201).json({ message: 'Room created successfully', room });
+        const { body } = req;
+
+        if (!body || (Array.isArray(body) && !body.length)) {
+            return res.status(400).json({ message: 'Invalid room data' });
+        }
+
+        const rooms = Array.isArray(body)
+            ? await Room.insertMany(body)
+            : await Room.create(body);
+
+        res.status(201).json({
+            message: Array.isArray(body) ? 'Rooms created successfully' : 'Room created successfully',
+            rooms,
+        });
     } catch (error) {
         next(error);
     }
@@ -15,7 +26,7 @@ exports.createRoom = async (req, res, next) => {
 exports.getAllRooms = async (req, res, next) => {
     try {
         const rooms = await Room.find();
-        if(rooms.length === 0){
+        if (rooms.length === 0) {
             return res.status(404).json({ success: false, message: 'Room not found!' });
         }
         res.status(200).json(rooms);

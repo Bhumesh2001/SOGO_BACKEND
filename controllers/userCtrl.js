@@ -14,6 +14,10 @@ exports.signup = async (req, res, next) => {
             return res.status(409).json({ success: false, message: 'Admin already exists' });
         }
 
+        if(await User.findOne({ email })){
+            return res.status(409).json({ success: false, message: 'User already exists!' });
+        }
+
         // Generate 6-digit OTP and expiry time (10 minutes)
         const otp = Math.floor(100000 + Math.random() * 900000);
         const otpExpiry = Date.now() + 10 * 60 * 1000;
