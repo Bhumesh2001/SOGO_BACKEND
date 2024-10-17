@@ -8,12 +8,19 @@ const passwordValidator = (password) => {
 };
 
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
         type: String,
-        required: [true, 'Name is required'],
+        required: [true, 'First name is required'],
         trim: true,
-        minlength: [2, 'Name must be at least 2 characters long'],
-        maxlength: [100, 'Name must be less than 100 characters'],
+        minlength: [2, 'First name must be at least 2 characters long'],
+        maxlength: [50, 'First name must be less than 50 characters'],
+    },
+    lastName: {
+        type: String,
+        required: [true, 'Last name is required'],
+        trim: true,
+        minlength: [2, 'Last name must be at least 2 characters long'],
+        maxlength: [50, 'Last name must be less than 50 characters'],
     },
     email: {
         type: String,
@@ -44,7 +51,7 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user',
         required: true,
-    }
+    },
 }, { timestamps: true });
 
 userSchema.pre('save', async function (next) {
