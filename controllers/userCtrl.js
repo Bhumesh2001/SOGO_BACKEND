@@ -85,6 +85,15 @@ exports.profile = async (req, res, next) => {
     }
 };
 
+// check user is logged in or not
+exports.isLoggedin = async(req, res, next) => {
+    try {
+        res.status(200).json({ success: true, message: 'User is logged in', userId: req.user._id });
+    } catch (error) {
+         next(error);
+    }
+};
+
 // logout
 exports.logout = (req, res) => {
     const token = req.header('Authorization')?.split(' ')[1] || req.cookies?.token;

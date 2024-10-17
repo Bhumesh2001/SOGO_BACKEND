@@ -20,6 +20,7 @@ router.post(
     checkRequiredFields(["email", "password"]),
     userController.login
 );
+router.get('/check-login', isAuthenticated, userController.isLoggedin);
 router.get('/profile', isAuthenticated, userController.profile);
 router.post('/logout', userController.logout);
 
