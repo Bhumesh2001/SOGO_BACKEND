@@ -1,4 +1,5 @@
 const Booking = require('../models/bookingModel');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Create Booking
 exports.createBooking = async (req, res, next) => {
@@ -17,6 +18,12 @@ exports.createBooking = async (req, res, next) => {
                 message: 'Room is already booked for the selected dates.'
             });
         }
+
+        // const paymentIntent = await stripe.paymentIntents.create({
+        //     amount: amount, // Amount in cents
+        //     currency: 'usd', // Currency code
+        // });
+
         const newBooking = new Booking(req.body);
         await newBooking.save();
 
