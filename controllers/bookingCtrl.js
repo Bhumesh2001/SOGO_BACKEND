@@ -1,33 +1,34 @@
 const Booking = require('../models/bookingModel');
-// const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Create Booking
 exports.createBooking = async (req, res, next) => {
     try {
-        const { hotelId, roomId, checkIn, checkOut } = req.body;
-        const conflictingBooking = await Booking.findOne({
-            hotelId,
-            roomId,
-            $or: [
-                { checkIn: { $lt: checkOut }, checkOut: { $gt: checkIn } }
-            ]
+        const { hotelId, roomId, checkIn, checkOut, totalPrice } = req.body;
+
+        const userId = req.user._id;
+
+        if (!userId) return res.status(404).json({ success: false, message: 'userId not found!' });
+
+        // const conflictingBooking = await Booking.findOne({ hotelId, roomId, checkIn, checkOut });
+
+        // if (conflictingBooking) {
+        //     return res.status(400).json({
+        //         message: 'Room is already booked for the selected dates.'
+        //     });
+        // }
+
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: Math.round(totalPrice * 100),
+            currency: 'usd',
         });
 
-        if (conflictingBooking) {
-            return res.status(400).json({
-                message: 'Room is already booked for the selected dates.'
-            });
-        }
-
-        // const paymentIntent = await stripe.paymentIntents.create({
-        //     amount: amount, // Amount in cents
-        //     currency: 'usd', // Currency code
-        // });
-
-        const newBooking = new Booking(req.body);
+        const newBooking = new Booking({ userId, ...req.body });
         await newBooking.save();
 
-        res.status(201).json(newBooking);
+        const bookingObject = newBooking.toObject();
+
+        res.status(201).json({ ...bookingObject, clientSecret: paymentIntent.client_secret });
     } catch (error) {
         next(error);
     }
@@ -80,7 +81,7 @@ exports.updateBooking = async (req, res, next) => {
 // Delete Booking
 exports.deleteBooking = async (req, res, next) => {
     try {
-        const userId = req.user._id; 
+        const userId = req.user._id;
         const booking = await Booking.findOneAndDelete({ _id: req.params.id, userId });
 
         if (!booking) {
@@ -88,6 +89,27 @@ exports.deleteBooking = async (req, res, next) => {
         }
 
         res.status(200).json({ message: 'Booking deleted successfully' });
+    } catch (error) {
+        next(error);
+    }
+};
+
+// update payment status
+exports.updateStatus = async (req, res, next) => {
+    try {
+        const { hotelId, roomId, status } = req.body;
+
+        const userId = req.user._id;
+        if (!userId) return res.status(404).json({ success: false, message: 'userId not found!' });
+
+        const booking_data = await Booking.findOneAndUpdate(
+            { userId, hotelId, roomId },
+            { status },
+            { new: true, runValidators: true }
+        );
+        if (!booking_data) return res.status(404).json({ success: false, message: 'Data not found!' });
+        res.status(200).json({ success: true, message: 'status updated successful...!' });
+
     } catch (error) {
         next(error);
     }
