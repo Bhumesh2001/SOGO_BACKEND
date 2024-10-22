@@ -1,0 +1,173 @@
+{
+    "Header": {
+        "Agency": "148535",
+        "User": "REISENBOOKINGXMLTEST",
+        "Password": "",
+        "Operation": "HOTEL_SEARCH_RESPONSE",
+        "OperationType": "Response",
+        "Stats": {
+            "HotelQty": 2,
+            "ResultsQty": 8
+        }
+    },
+    "Hotels": [
+        {
+            "HotelName": "SAPNA CLARKS INN",
+            "HotelCode": 488129,
+            "CountryId": 40,
+            "CityId": 1162,
+            "Location": "VIKAS NAGAR",
+            "BestSellerRank": "0",
+            "HotelImage": "https://i.travelapi.com/lodging/9000000/8710000/8701400/8701340/66aa8998_b.jpg",
+            "Offers": [
+                {
+                    "HotelSearchCode": "11414811/669071205008403478/6",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Deluxe Room",
+                        "Deluxe Room"
+                    ],
+                    "RoomBasis": "RO",
+                    "Availability": 1,
+                    "TotalPrice": 227,
+                    "Currency": "USD",
+                    "Category": "3",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS 100.00% OF BOOKING PRICE.<br />Bed types are not guaranteed:Deluxe Room - 1 Queen  QueenBed (room for 2 adults .)Deluxe Room - 1 Queen  QueenBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                },
+                {
+                    "HotelSearchCode": "11414811/669071205008403478/8",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Deluxe Room",
+                        "Deluxe Room"
+                    ],
+                    "RoomBasis": "BB",
+                    "Availability": 1,
+                    "TotalPrice": 258,
+                    "Currency": "USD",
+                    "Category": "3",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS 100.00% OF BOOKING PRICE.<br />Bed types are not guaranteed:Deluxe Room - 1 Queen  QueenBed (room for 2 adults .)Deluxe Room - 1 Queen  QueenBed (room for 1 adults  and 2 children.)",
+                    "Special": "Breakfast buffet, Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                }
+            ]
+        },
+        {
+            "HotelName": "NOVOTEL LUCKNOW GOMTI NAGAR",
+            "HotelCode": 434975,
+            "CountryId": 40,
+            "CityId": 1162,
+            "Location": "GOMTI NAGAR",
+            "BestSellerRank": "0",
+            "HotelImage": "https://i.travelapi.com/lodging/17000000/16620000/16615400/16615381/48fafd56_b.jpg",
+            "Offers": [
+                {
+                    "HotelSearchCode": "11402165/669071205008403478/1",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Superior Twin Room Multiple Beds",
+                        "Superior Twin Room Multiple Beds"
+                    ],
+                    "RoomBasis": "RO",
+                    "Availability": 1,
+                    "TotalPrice": 295,
+                    "Currency": "USD",
+                    "Category": "5",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS PRICE OF 1 NIGHTS.<br />Bed types are not guaranteed:Superior Twin Room, Multiple Beds - 2 Twin  TwinBed and 1 Full  SofaBed (room for 2 adults .)Superior Twin Room, Multiple Beds - 2 Twin  TwinBed and 1 Full  SofaBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                },
+                {
+                    "HotelSearchCode": "11402165/669071205008403478/4",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Superior Room 1 King Bed with Sofa bed",
+                        "Superior Room 1 King Bed with Sofa bed"
+                    ],
+                    "RoomBasis": "RO",
+                    "Availability": 1,
+                    "TotalPrice": 295,
+                    "Currency": "USD",
+                    "Category": "5",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS PRICE OF 1 NIGHTS.<br />Bed types are not guaranteed:Superior Room, 1 King Bed with Sofa bed - 1 King  KingBed and 1 Full  SofaBed (room for 2 adults .)Superior Room, 1 King Bed with Sofa bed - 1 King  KingBed and 1 Full  SofaBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                },
+                {
+                    "HotelSearchCode": "11402165/669071205008403478/0",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Superior Twin Room Multiple Beds",
+                        "Superior Twin Room Multiple Beds"
+                    ],
+                    "RoomBasis": "BB",
+                    "Availability": 1,
+                    "TotalPrice": 331,
+                    "Currency": "USD",
+                    "Category": "5",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS PRICE OF 1 NIGHTS.<br />Bed types are not guaranteed:Superior Twin Room, Multiple Beds - 2 Twin  TwinBed and 1 Full  SofaBed (room for 2 adults .)Superior Twin Room, Multiple Beds - 2 Twin  TwinBed and 1 Full  SofaBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free breakfast, Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                },
+                {
+                    "HotelSearchCode": "11402165/669071205008403478/5",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Superior Room 1 King Bed with Sofa bed",
+                        "Superior Room 1 King Bed with Sofa bed"
+                    ],
+                    "RoomBasis": "BB",
+                    "Availability": 1,
+                    "TotalPrice": 331,
+                    "Currency": "USD",
+                    "Category": "5",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS PRICE OF 1 NIGHTS.<br />Bed types are not guaranteed:Superior Room, 1 King Bed with Sofa bed - 1 King  KingBed and 1 Full  SofaBed (room for 2 adults .)Superior Room, 1 King Bed with Sofa bed - 1 King  KingBed and 1 Full  SofaBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free breakfast, Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                },
+                {
+                    "HotelSearchCode": "11402165/669071205008403478/3",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Executive Room 1 King Bed",
+                        "Executive Room 1 King Bed"
+                    ],
+                    "RoomBasis": "RO",
+                    "Availability": 1,
+                    "TotalPrice": 434,
+                    "Currency": "USD",
+                    "Category": "5",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS PRICE OF 1 NIGHTS.<br />Bed types are not guaranteed:Executive Room, 1 King Bed - 1 King  KingBed (room for 2 adults .)Executive Room, 1 King Bed - 1 King  KingBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                },
+                {
+                    "HotelSearchCode": "11402165/669071205008403478/2",
+                    "CxlDeadLine": "23/Oct/2024",
+                    "NonRef": false,
+                    "Rooms": [
+                        "Executive Room 1 King Bed",
+                        "Executive Room 1 King Bed"
+                    ],
+                    "RoomBasis": "BB",
+                    "Availability": 1,
+                    "TotalPrice": 489,
+                    "Currency": "USD",
+                    "Category": "5",
+                    "Remark": "EXTRA BED FOR CHILDREN IS NOT GUARANTEED.<BR />IF YOU FAIL TO CHECK-IN FOR THIS RESERVATION, OR IF YOU CANCEL OR CHANGE THIS RESERVATION AFTER CXL DEADLINE, YOU MAY INCUR PENALTY CHARGES AT THE DISCRETION OF THE HOTEL OF UP TO 100% OF THE BOOKING VALUE, UNLESS OTHERWISE STATED.<br /><br /> STARTING 23/10/2024 CXL-PENALTY FEE IS PRICE OF 1 NIGHTS.<br />Bed types are not guaranteed:Executive Room, 1 King Bed - 1 King  KingBed (room for 2 adults .)Executive Room, 1 King Bed - 1 King  KingBed (room for 1 adults  and 2 children.)",
+                    "Special": "Free breakfast, Free valet parking, Free self parking, Free WiFi",
+                    "Preferred": false
+                }
+            ]
+        }
+    ]
+}
