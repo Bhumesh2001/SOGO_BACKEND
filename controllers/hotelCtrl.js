@@ -10,7 +10,7 @@ exports.getAllHotels = async (req, res) => {
         const cityToFind = location.split(',')[0];
 
         const data_ = await readCSV(csvFilePath);
-        const cityId = getCityIdByName(data_, cityToFind);        
+        const cityId = getCityIdByName(data_, cityToFind);
 
         const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
         <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -29,7 +29,7 @@ exports.getAllHotels = async (req, res) => {
                                 <OperationType>Request</OperationType>
                             </Header>
                             <Main Version="2.3" ResponseFormat="JSON" IncludeGeo="false" Currency="USD" HotelFacilities="true" RoomFacilities="true">
-                            <SortOrder>1</SortOrder>
+                                <SortOrder>1</SortOrder>
                                 <MaxResponses>500</MaxResponses>
                                 <MaximumWaitTime>15</MaximumWaitTime>
                                 <Nationality>GB</Nationality>
@@ -54,16 +54,18 @@ exports.getAllHotels = async (req, res) => {
         };
 
         const { data } = await axios.post(process.env.BASE_URL, soapRequest, { headers });
-        const { 'soap:Envelope': soapEnvelope = {}, 'soap12:Envelope': soap12Envelope = {} } =
-            await xml2js.parseStringPromise(data, { explicitArray: false });
 
-        const soapBody = soapEnvelope['soap:Body'] || soap12Envelope['soap12:Body'];
+        // Parsing the SOAP response using xml2js
+        const parsedResult = await xml2js.parseStringPromise(data, { explicitArray: false });
+
+        const soapBody = parsedResult['soap:Envelope']?.['soap:Body'] || parsedResult['soap12:Envelope']?.['soap12:Body'];
         const soapResult = soapBody?.MakeRequestResponse?.MakeRequestResult;
 
-        if (!soapResult) throw new Error('Invalid SOAP response');
+        if (!soapResult) {
+            throw new Error('Invalid SOAP response');
+        }
 
-        const jsonResponse = JSON.parse(soapResult);
-        res.status(200).json(jsonResponse);
+        res.status(200).json(soapResult);
 
     } catch (error) {
         console.error('Error in getAllHotels:', error);
