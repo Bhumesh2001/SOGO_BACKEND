@@ -55,7 +55,6 @@ exports.getAllHotels = async (req, res) => {
 
         const { data } = await axios.post(process.env.BASE_URL, soapRequest, { headers });
 
-        // Parsing the SOAP response using xml2js
         const parsedResult = await xml2js.parseStringPromise(data, { explicitArray: false });
 
         const soapBody = parsedResult['soap:Envelope']?.['soap:Body'] || parsedResult['soap12:Envelope']?.['soap12:Body'];
