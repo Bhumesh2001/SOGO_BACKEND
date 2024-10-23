@@ -23,12 +23,12 @@ const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
                         <Operation>HOTEL_SEARCH_REQUEST</Operation>
                         <OperationType>Request</OperationType>
                     </Header>
-                    <Main Version="2.3" ResponseFormat="JSON" IncludeGeo="false" Currency="USD">
+                    <Main Version="2.3" ResponseFormat="JSON" IncludeGeo="false" Currency="USD" HotelFacilities="true" RoomFacilities="true">
                         <MaximumWaitTime>15</MaximumWaitTime>
                         <Nationality>GB</Nationality>
-                        <CityCode>1162</CityCode>
-                        <ArrivalDate>2024-10-25</ArrivalDate>
-                        <Nights>2</Nights>
+                        <CityCode>17749</CityCode>
+                        <ArrivalDate>2024-10-28</ArrivalDate>
+                        <Nights>3</Nights>
                         <Rooms>
                             <Room Adults="2" RoomCount="1" ChildCount="0"/>
                             <Room Adults="1" RoomCount="1" ChildCount="2">
@@ -61,13 +61,54 @@ async function sendSoapRequest() {
         // Convert the response string to JSON
         const jsonResponse = JSON.parse(soapResult);
 
-        // Writing the result to a JSON file
-        await fs.writeFile('./hotels.json', JSON.stringify(jsonResponse, null, 4), 'utf8');
-        console.log('SOAP request successful and response saved to hotels.json:', jsonResponse);
+        // Handle missing or malformed hotel data safely
+        const hotel_data = jsonResponse.Hotels.map(hotel => {
+            // console.log(hotel,'===');
+
+            let minTotalPrice = Infinity;
+            let maxStar = 0;
+            let bestFacilities = '';
+
+            // Ensure hotel offers exist and are iterable
+            if (hotel.Offers && Array.isArray(hotel.Offers)) {
+                hotel.Offers.forEach(room => {
+                    // Update the minimum total price
+                    if (room.TotalPrice < minTotalPrice) {
+                        minTotalPrice = room.TotalPrice;
+                    }
+
+                    // Update the star rating
+                    const starRating = parseInt(room.Category) || 0;  // Fallback to 0 if Category is invalid
+                    maxStar = Math.max(maxStar, starRating);
+
+                    // Compare room facilities
+                    const roomFacilities = room.Special ? room.Special.split(',').map(fac => fac.trim()) : [];
+                    if (roomFacilities.length > bestFacilities.split(',').length) {
+                        bestFacilities = room.Special;
+                    }
+                });
+            }
+
+            // Ensure bestFacilities is split into an array if available
+            const hotelFacilitiesArray = bestFacilities ? bestFacilities.split(',').map(fac => fac.trim()) : [];
+
+            // Construct the hotel object with the required fields
+            return {
+                HotelName: hotel.HotelName || 'Unknown',  // Handle missing HotelName
+                Location: hotel.Location || 'Unknown',    // Handle missing Location
+                HotelImage: hotel.HotelImage || '',       // Handle missing HotelImage
+                HotelFacilities: hotelFacilitiesArray,    // Facilities from the room with the most facilities
+                TotalPrice: minTotalPrice === Infinity ? 0 : minTotalPrice,  // Fallback to 0 if no valid price found
+                Star: maxStar
+            };
+        });
+
+        console.log(hotel_data, '=====');
     } catch (error) {
         console.error('Error during SOAP request', error);
         throw error;
     }
 };
 
-// sendSoapRequest();
+sendSoapRequest();
+

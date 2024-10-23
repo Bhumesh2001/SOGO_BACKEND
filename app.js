@@ -18,7 +18,7 @@ const { connectDB } = require('./db/connect');
 
 // middleware
 app.use(cors({
-    origin: ['https://sogo-web.netlify.app', 'http://localhost:5001', 'http://127.0.0.1:5500'],
+    origin: ['https://sogo-web.netlify.app'],
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
 }));

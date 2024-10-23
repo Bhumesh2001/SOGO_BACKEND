@@ -1,8 +1,17 @@
 const axios = require('axios');
 const xml2js = require('xml2js');
+const { readCSV, getCityIdByName } = require('../utils/csvReader');
 
 exports.getAllHotels = async (req, res) => {
     try {
+        const { location, checkIn, checkOut, adults, children, nights, childrenAges } = req.body;
+
+        const csvFilePath = './config/Destinations.csv';
+        const cityToFind = location.split(',')[0];
+
+        const data_ = await readCSV(csvFilePath);
+        const cityId = getCityIdByName(data_, cityToFind);        
+
         const soapRequest = `<?xml version="1.0" encoding="utf-8"?>
         <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                          xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
@@ -19,12 +28,14 @@ exports.getAllHotels = async (req, res) => {
                                 <Operation>HOTEL_SEARCH_REQUEST</Operation>
                                 <OperationType>Request</OperationType>
                             </Header>
-                            <Main Version="2.3" ResponseFormat="JSON" IncludeGeo="false" Currency="USD">
+                            <Main Version="2.3" ResponseFormat="JSON" IncludeGeo="false" Currency="USD" HotelFacilities="true" RoomFacilities="true">
+                            <SortOrder>1</SortOrder>
+                                <MaxResponses>500</MaxResponses>
                                 <MaximumWaitTime>15</MaximumWaitTime>
                                 <Nationality>GB</Nationality>
-                                <CityCode>1162</CityCode>
-                                <ArrivalDate>2024-10-25</ArrivalDate>
-                                <Nights>3</Nights>
+                                <CityCode>${cityId}</CityCode>
+                                <ArrivalDate>${checkIn}</ArrivalDate>
+                                <Nights>${nights}</Nights>
                                 <Rooms>
                                     <Room Adults="2" RoomCount="1" ChildCount="0"/>
                                     <Room Adults="1" RoomCount="1" ChildCount="0"/>
@@ -42,18 +53,20 @@ exports.getAllHotels = async (req, res) => {
             'API-AgencyID': process.env.AGENCY_ID,
         };
 
-        const response = await axios.post(process.env.BASE_URL, soapRequest, { headers });
-        const result = await xml2js.parseStringPromise(response.data, { explicitArray: false });
+        const { data } = await axios.post(process.env.BASE_URL, soapRequest, { headers });
+        const { 'soap:Envelope': soapEnvelope = {}, 'soap12:Envelope': soap12Envelope = {} } =
+            await xml2js.parseStringPromise(data, { explicitArray: false });
 
-        const soapBody = result['soap:Envelope']['soap:Body'];
-        const soapResult = soapBody['MakeRequestResponse'].MakeRequestResult;
+        const soapBody = soapEnvelope['soap:Body'] || soap12Envelope['soap12:Body'];
+        const soapResult = soapBody?.MakeRequestResponse?.MakeRequestResult;
+
+        if (!soapResult) throw new Error('Invalid SOAP response');
 
         const jsonResponse = JSON.parse(soapResult);
-        // console.log(jsonResponse,'json response');
-        
         res.status(200).json(jsonResponse);
+
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: 'Internal server error!', error });
+        console.error('Error in getAllHotels:', error);
+        res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
     }
 };
