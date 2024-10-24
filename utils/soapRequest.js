@@ -111,4 +111,3 @@ async function sendSoapRequest() {
 };
 
 sendSoapRequest();
-

@@ -7,7 +7,7 @@ const { checkRequiredFields } = require('../middleware/validateMiddleware');
 
 router.post(
     '/signup', 
-    checkRequiredFields(["firstName", "lastName", "email", "password"]),
+    checkRequiredFields(["email", "password"]),
     userController.signup
 );
 router.post(

@@ -10,14 +10,14 @@ const passwordValidator = (password) => {
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, 'First name is required'],
+        default: "",
         trim: true,
         minlength: [2, 'First name must be at least 2 characters long'],
         maxlength: [50, 'First name must be less than 50 characters'],
     },
     lastName: {
         type: String,
-        required: [true, 'Last name is required'],
+        default: "",
         trim: true,
         minlength: [2, 'Last name must be at least 2 characters long'],
         maxlength: [50, 'Last name must be less than 50 characters'],
