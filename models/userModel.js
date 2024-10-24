@@ -10,14 +10,12 @@ const passwordValidator = (password) => {
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        default: "",
         trim: true,
         minlength: [2, 'First name must be at least 2 characters long'],
         maxlength: [50, 'First name must be less than 50 characters'],
     },
     lastName: {
         type: String,
-        default: "",
         trim: true,
         minlength: [2, 'Last name must be at least 2 characters long'],
         maxlength: [50, 'Last name must be less than 50 characters'],
@@ -70,5 +68,6 @@ userSchema.methods.generateAuthToken = function () {
 };
 
 userSchema.index({ email: 1 });
+userSchema.index({ firstName: 1, lastName: 1 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -37,7 +37,7 @@ exports.signup = async (req, res, next) => {
 // OTP verification and moving user data to MongoDB
 exports.verifyOTP = async (req, res, next) => {
     const { email, otp } = req.body;
-
+    
     try {
         const userDataString = await client.get(email);
 
@@ -55,7 +55,7 @@ exports.verifyOTP = async (req, res, next) => {
         storeToken(res, token);
 
         res.status(200).json({ success: true, message: 'User verified and created successfully', token, user });
-    } catch (error) {
+    } catch (error) {        
         next(error);
     }
 };
